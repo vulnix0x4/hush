@@ -1,4 +1,4 @@
-# Quiet Notifications
+# Hush
 
 **Keep the useful alerts. Turn off the noise.**
 
@@ -8,19 +8,19 @@ It works autonomously through reachable settings and puts access blockers and am
 
 ## Install
 
-Copy `skills/quiet-notifications` into your Codex skills directory. From this repository:
+Copy `skills/hush` into your Codex skills directory. From this repository:
 
 ```sh
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
-cp -R skills/quiet-notifications "${CODEX_HOME:-$HOME/.codex}/skills/"
+cp -R skills/hush "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
-If an existing `quiet-notifications` folder is present, inspect or back it up before replacing it. Start a new Codex task if the skill is not immediately discovered.
+If an existing `hush` folder is present, inspect or back it up before replacing it. Start a new Codex task if the skill is not immediately discovered.
 
 ## Run
 
 ```text
-Use $quiet-notifications to clean up unnecessary notifications across
+Use $hush to clean up unnecessary notifications across
 my devices and services. Keep important and deliberately requested alerts.
 Work through everything you can access and put unresolved items at the end.
 ```
@@ -35,7 +35,7 @@ You can narrow the scope or add exceptions in the same request: “Only this iPh
 4. **Account for the whole pass.** Every discovered account/channel has an outcome. Mixed controls stay intact when finer settings cannot be found; locked services wait in the final handoff.
 5. **Report clearly.** A concise result plus a private offline report shows verified changes, useful alerts preserved, coverage, remaining work, and undo details.
 
-[Read the default policy](skills/quiet-notifications/references/policy.md) · [View the fictional sample report](demo/report.md) · [Open the HTML preview locally](demo/report.html)
+[Read the default policy](skills/hush/references/policy.md) · [View the fictional sample report](demo/report.md) · [Open the HTML preview locally](demo/report.html)
 
 ## What it needs
 
@@ -54,10 +54,10 @@ It does not cancel paid subscriptions, leave rewards programs, change security s
 Generate a report from a private run ledger:
 
 ```sh
-python3 skills/quiet-notifications/scripts/render_report.py /path/to/private-ledger.json --out /path/to/private-report
+python3 skills/hush/scripts/render_report.py /path/to/private-ledger.json --out /path/to/private-report
 ```
 
-The [ledger schema](skills/quiet-notifications/references/reporting.md) explains the fields. The renderer produces HTML and Markdown without network requests or external assets. Keep personal run files outside this repository. Review and redact before sharing; `.gitignore` cannot protect files saved under arbitrary names.
+The [ledger schema](skills/hush/references/reporting.md) explains the fields. The renderer produces HTML and Markdown without network requests or external assets. Keep personal run files outside this repository. Review and redact before sharing; `.gitignore` cannot protect files saved under arbitrary names.
 
 Everything in `demo/` is fictional. The repository contains no private cleanup history, account identifiers, or screenshots.
 
@@ -65,7 +65,7 @@ Everything in `demo/` is fictional. The repository contains no private cleanup h
 
 ```sh
 python3 -m unittest discover -s tests -v
-python3 skills/quiet-notifications/scripts/render_report.py demo/ledger.json --out demo
+python3 skills/hush/scripts/render_report.py demo/ledger.json --out demo
 ```
 
 Tests check report integrity, verification counts, contradictory states, and escaping. They do not simulate access to live apps or guarantee future settings behavior. [Behavior review cases](tests/behavior-cases.md) capture the decisions to check when adapting the skill.

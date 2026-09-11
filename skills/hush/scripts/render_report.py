@@ -100,7 +100,7 @@ def render(data):
     label = "Complete discovered coverage" if data["run_status"] == "complete" else "Partial coverage"
     demo = "Synthetic demonstration · " if data.get("synthetic") else ""
     parts = [f'<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(data["title"])}</title><style>{CSS}</style><body><main><header>',
-             f'<div class="eyebrow">{demo}Quiet Notifications</div><h1>{esc(data["title"])}</h1>',
+             f'<div class="eyebrow">{demo}Hush</div><h1>{esc(data["title"])}</h1>',
              f'<p>{esc(data["scope"])}</p><p class="muted">{esc(label)} · {esc(data["captured_at"])}</p></header><div class="stats">']
     for number, title in ((verified, "Verified setting changes"), (f"{inspected}/{len(coverage)}", "Account/channel rows inspected"), (len(unresolved), "Rows needing follow-up")):
         parts.append(f'<div class="stat"><strong>{number}</strong><span>{title}</span></div>')

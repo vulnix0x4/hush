@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hush"
+  short_description: "Quiet distracting alerts across apps and accounts"
+  default_prompt: "Use $hush to clean up unnecessary notifications across my devices and services, preserve useful alerts, and report verified changes and unresolved items afterward."

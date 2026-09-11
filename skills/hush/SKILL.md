@@ -1,9 +1,9 @@
 ---
-name: quiet-notifications
+name: hush
 description: Clean up unwanted notifications across a person's devices, apps, and signed-in services. Discover actual senders from notification activity and other available sources, disable marketing and engagement alerts at their source, preserve useful communication and transactional alerts, and report verified changes with undo instructions. Use for notification cleanup, reducing notification noise, or applying an important-alerts-only preference across accounts.
 ---
 
-# Quiet Notifications
+# Hush
 
 Interrupt the person for communication, commitments, tasks, safety, or information they deliberately requested. Disable unsolicited marketing, recommendations, popularity updates, and prompts to return. Change real settings and verify them; instructions alone are not a completed cleanup.
 

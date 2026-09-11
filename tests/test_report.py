@@ -5,7 +5,7 @@ from pathlib import Path
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-SPEC = importlib.util.spec_from_file_location('report', ROOT / 'skills/quiet-notifications/scripts/render_report.py')
+SPEC = importlib.util.spec_from_file_location('report', ROOT / 'skills/hush/scripts/render_report.py')
 REPORT = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(REPORT)
 
