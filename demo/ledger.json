@@ -1,0 +1,22 @@
+{
+  "title": "A quieter day.",
+  "captured_at": "2026-09-10 14:00 UTC",
+  "scope": "Fictional demonstration of a cleanup across phone notifications and signed-in websites.",
+  "run_status": "partial",
+  "synthetic": true,
+  "coverage": [
+    {"id":"parcel-push","service":"Parcel Shop","account":"Personal","channel":"Phone push","status":"resolved","notes":"Marketing disabled; delivery and return updates preserved.","next_action":""},
+    {"id":"parcel-email","service":"Parcel Shop","account":"Personal","channel":"Email","status":"resolved","notes":"Default offers disabled; receipts preserved.","next_action":""},
+    {"id":"chat-push","service":"Circle Chat","account":"Personal","channel":"Phone push","status":"preserved","notes":"Inspected: direct messages and calls only; discovery nudges were already off.","next_action":""},
+    {"id":"video-push","service":"Lantern Video","account":"Personal","channel":"Phone push","status":"partial","notes":"Recommendations disabled. One remaining category mixes creator replies with trending clips.","next_action":"Choose whether that mixed category is worth keeping; preserved for now after checking web and app controls."},
+    {"id":"bank-push","service":"Harbor Bank","account":"Personal","channel":"Phone push","status":"blocked","notes":"App requires on-device authentication; preferences could not be inspected.","next_action":"Authenticate on the device, then resume this item."}
+  ],
+  "changes": [
+    {"id":"c1","coverage_id":"parcel-push","category":"Offers & recommendations","before":"On","after":"Off","status":"verified","evidence":"Reopened notification preferences; Offers & recommendations remained off.","undo":"Parcel Shop → Profile → Notifications → Offers & recommendations → On."},
+    {"id":"c2","coverage_id":"parcel-email","category":"Weekly offers","before":"Subscribed","after":"Unsubscribed","status":"verified","evidence":"Saved communication preferences and reloaded; weekly offers remained unchecked.","undo":"Parcel Shop website → Account → Communication preferences → Weekly offers → select → Save."},
+    {"id":"c3","coverage_id":"video-push","category":"Recommended videos","before":"On","after":"Off","status":"verified","evidence":"Returned to Notifications after leaving the screen; Recommended videos remained off.","undo":"Lantern Video → Settings → Notifications → Recommended videos → On."}
+  ],
+  "preserved": ["Delivery progress, returns, and receipts remain enabled.","Direct messages and calls remain enabled; previously disabled nudges stay off.","Deliberately selected creator alerts remain enabled."],
+  "discovery": ["Synthetic phone inventory and website preferences: five account/channel rows across four services.","All reachable listed controls inspected. One mixed category and one authentication blocker remain.","This demonstration does not describe a real account or actual settings changes."],
+  "baseline": ["Fictional Screen Time sample: Parcel Shop, 42 notifications over the preceding seven days. This is historical activity, not notifications prevented."]
+}
