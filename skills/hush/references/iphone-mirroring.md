@@ -5,7 +5,7 @@ This route changes app/account settings, not notification interception. Use curr
 ## Access and navigation
 
 - Discover available apps as needed. The observed iPhone Mirroring bundle ID was `com.apple.ScreenContinuity`.
-- Mac login prompts require user authentication. Using/unlocking the iPhone can end mirroring; it normally must remain locked. If access cannot be recovered with authorized actions, queue a final handoff and work elsewhere.
+- Mac login prompts require user authentication. Using/unlocking the iPhone can end mirroring; it normally must remain locked. Request the needed unlock promptly using [access-and-resume.md](access-and-resume.md), continue other work while waiting, and resume the phone queue after verifying access. Do not defer the first unlock request until the final report.
 - Do not disable Face ID or device security. Some app authentication requires the physical phone.
 - Observed shortcuts: Command-1 Home Screen, Command-2 App Switcher, Command-3 Spotlight. Check current tool instructions.
 - Spotlight finds Settings/apps quickly. Wait for the field before typing; animation can drop or reorder characters. Verify the text and select-all/retype if needed. Click the app icon center, not its label or a similarly named document/Settings result.

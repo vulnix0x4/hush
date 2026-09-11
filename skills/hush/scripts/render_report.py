@@ -21,6 +21,24 @@ def validate(data):
         raise ValueError("Invalid run_status")
     if "synthetic" in data and not isinstance(data["synthetic"], bool):
         raise ValueError("synthetic must be boolean")
+    if "scope_complete" in data and not isinstance(data["scope_complete"], bool):
+        raise ValueError("scope_complete must be boolean")
+    for key, fields, statuses in (
+        ("access_requests", ("id", "status", "action", "notes"), {"pending", "satisfied", "declined"}),
+        ("test_results", ("name", "method", "status", "evidence"), {"passed", "failed", "blocked", "not_exercised"}),
+    ):
+        if not isinstance(data.get(key, []), list):
+            raise ValueError(f"{key} must be an array")
+        identifiers = set()
+        for row in data.get(key, []):
+            require_text(row, fields)
+            if row["status"] not in statuses:
+                raise ValueError(f"Invalid {key} status")
+            if row[fields[0]] in identifiers:
+                raise ValueError(f"Duplicate {key} identifier")
+            identifiers.add(row[fields[0]])
+            if key == "test_results" and row["method"] not in {"live", "automated", "manual_review"}:
+                raise ValueError("Invalid test method")
     for key in ("coverage", "changes", "preserved", "discovery"):
         if not isinstance(data.get(key), list):
             raise ValueError(f"{key} must be an array")
@@ -64,10 +82,12 @@ def validate(data):
         if row["status"] != "verified" and owner["status"] == "resolved":
             raise ValueError("Unverified attempt cannot have resolved coverage")
     if data["run_status"] == "complete" and (
-        not coverage or any(r["status"] not in {"resolved", "preserved"} for r in coverage.values())
+        data.get("scope_complete") is not True
+        or any(r["status"] != "satisfied" for r in data.get("access_requests", []))
+        or not coverage or any(r["status"] not in {"resolved", "preserved"} for r in coverage.values())
         or any(r["status"] != "verified" for r in data["changes"])
     ):
-        raise ValueError("Complete report has unresolved or empty coverage")
+        raise ValueError("Complete report requires finished discovery, satisfied access, and resolved nonempty coverage")
     return coverage
 
 
@@ -98,6 +118,8 @@ def render(data):
     inspected = sum(r["status"] in {"resolved", "preserved", "partial"} for r in coverage.values())
     unresolved = [r for r in coverage.values() if r["status"] not in {"resolved", "preserved"}]
     label = "Complete discovered coverage" if data["run_status"] == "complete" else "Partial coverage"
+    if any(r["status"] == "pending" for r in data.get("access_requests", [])):
+        label = "Awaiting access · Partial coverage"
     demo = "Synthetic demonstration · " if data.get("synthetic") else ""
     parts = [f'<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(data["title"])}</title><style>{CSS}</style><body><main><header>',
              f'<div class="eyebrow">{demo}Hush</div><h1>{esc(data["title"])}</h1>',
@@ -113,6 +135,8 @@ def render(data):
             return
         parts.append(f'<h2>{title}</h2><ul>' + ''.join(f'<li>{esc(x)}</li>' for x in items) + '</ul>')
         lines.extend([f'## {title}', ''] + [f'- {md(x)}' for x in items] + [''])
+    bullet_section('Access requests', [f'{r["status"]}: {r["action"]} — {r["notes"]}' for r in data.get('access_requests', [])])
+    bullet_section('Test evidence', [f'{r["name"]} [{r["method"]}, {r["status"]}]: {r["evidence"]}' for r in data.get('test_results', [])])
     bullet_section('Useful alerts preserved', data['preserved'])
     parts.append('<h2>Settings changed & attempted</h2>')
     lines.extend(['## Settings changed & attempted', ''])
@@ -135,6 +159,9 @@ def render(data):
     parts.append('</tbody></table></div>')
     lines.append('')
     bullet_section('Discovery & boundaries', data['discovery'])
+    scope_note = 'Discovery covers the requested scope.' if data.get('scope_complete') is True else 'Discovery of the requested scope is incomplete or unconfirmed.'
+    parts.append(f'<p class="muted">{scope_note}</p>')
+    lines.extend([scope_note, ''])
     bullet_section('Historical baseline', data.get('baseline', []))
     footer = 'Fictional sample data only.' if data.get('synthetic') else 'Private account-settings report. Review and redact before sharing.'
     parts.append(f'<footer>{footer} Generated locally with no external assets.</footer></main></body></html>')
@@ -148,12 +175,17 @@ def main():
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
     try:
+        if args.ledger.resolve() in {(args.out / name).resolve() for name in ('report.html', 'report.md')}:
+            raise ValueError('Output would overwrite the input ledger')
         rendered_html, rendered_md = render(json.loads(args.ledger.read_text(encoding='utf-8')))
     except (ValueError, TypeError, KeyError, OSError) as error:
         parser.exit(2, f'Invalid ledger: {error}\n')
-    args.out.mkdir(parents=True, exist_ok=True)
-    (args.out / 'report.html').write_text(rendered_html, encoding='utf-8')
-    (args.out / 'report.md').write_text(rendered_md, encoding='utf-8')
+    try:
+        args.out.mkdir(parents=True, exist_ok=True)
+        (args.out / 'report.html').write_text(rendered_html, encoding='utf-8')
+        (args.out / 'report.md').write_text(rendered_md, encoding='utf-8')
+    except OSError as error:
+        parser.exit(2, f'Could not write report (outputs may be partial): {error}\n')
     print(f'Rendered report.html and report.md in {args.out}')
 
 

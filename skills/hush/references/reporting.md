@@ -15,6 +15,9 @@ It produces `report.html` (offline, responsive, printable) and `report.md`. If P
 Top-level fields:
 
 - `title`, `captured_at`, `scope`: nonempty strings. Include a timezone in the capture time.
+- `scope_complete`: boolean. True only after discovery covers the requested scope. Required and true for `run_status: complete`; omitted on older partial ledgers means unknown.
+- `access_requests`: optional array of objects with nonempty `id`, `status`, `action`, `notes`. Status: `pending`, `satisfied`, or `declined`. Update the same request when access returns; do not retain it as pending after verification. Pending/declined access prevents complete coverage.
+- `test_results`: optional array of objects with nonempty `name`, `method`, `status`, `evidence`. Method: `live`, `automated`, `manual_review`. Status: `passed`, `failed`, `blocked`, `not_exercised`. These describe test evidence independently from cleanup status.
 - `run_status`: `complete` only when every discovered item is resolved/preserved and all attempted changes verified; otherwise `partial`. Exhausting reachable work with remaining blockers is still partial coverage.
 - `synthetic`: optional boolean; true for fabricated demonstrations only.
 - `coverage`: array of objects with `id`, `service`, `account` (short alias), `channel`, `status`, `notes`, `next_action`. Status is `resolved`, `preserved`, `partial`, `blocked`, or `unreviewed`. Non-final items require a concrete next action. Include all discovered account/channel combinations, including zero-change inspections.
@@ -23,10 +26,10 @@ Top-level fields:
 - `discovery`: array of strings describing sources inspected, gaps, and completion boundaries.
 - `baseline`: optional array of strings giving historical notification counts with device, period, and source. These are prior activity, never measured savings.
 
-Do not put unchanged settings in `changes`. Record a master switch once; do not inflate success counts with children disabled only through inheritance. The renderer counts verified setting changes, not notifications prevented. Use one coverage row per service/account/channel; multiple categories reference that row.
+Do not put unchanged settings in `changes`. Record a master switch once; do not inflate success counts with children disabled only through inheritance. The renderer counts verified setting changes, not notifications prevented. Keep net unchanged or restored settings out of success counts; describe interrupted attempts and verified restoration in coverage notes. Consolidate repeated attempts on a setting into one final outcome. Use one coverage row per service/account/channel; multiple categories reference that row.
 
 ## Final response
 
-Lead with the actual result: verified settings changed and coverage achieved. Briefly name useful alerts preserved. Group remaining work by the user action needed (unlock/sign in, manual control, unresolved mixed category) and put any necessary questions here. Link the private report with the detailed before/after/undo ledger. A small table is useful for comparing services; avoid dumping the entire ledger into chat.
+Lead with the actual result: verified settings changed and coverage achieved. Briefly name useful alerts preserved. Group remaining work by the user action needed (unlock/sign in, manual control, unresolved mixed category) and put optional policy questions here. Essential access should already have been requested; show pending requests as awaiting access. Link the private report with the detailed before/after/undo ledger. A small table is useful for comparing services; avoid dumping the entire ledger into chat.
 
 Never claim all notifications are fixed, future delivery is verified, or a percentage reduction from historical counts alone. State scope gaps plainly. If a cleanup is interrupted, preserve the checkpoint and distinguish unfinished reachable work from genuine blockers.

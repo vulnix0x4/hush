@@ -1,12 +1,16 @@
 # A quieter day.
 
-Synthetic demonstration · Partial coverage · 2026-09-10 14:00 UTC
+Synthetic demonstration · Awaiting access · Partial coverage · 2026-09-10 14:00 UTC
 
 Fictional demonstration of a cleanup across phone notifications and signed-in websites.
 
 **3 verified setting changes · 4/5 account/channel rows inspected · 2 rows needing follow-up**
 
 Counts describe saved settings, not notifications prevented. Future delivery has not been measured.
+
+## Access requests
+
+- pending: Authenticate in Harbor Bank on the device — Fictional request made when access was first blocked; other service work continued.
 
 ## Useful alerts preserved
 
@@ -60,6 +64,8 @@ Undo: Lantern Video → Settings → Notifications → Recommended videos → On
 - Synthetic phone inventory and website preferences: five account/channel rows across four services.
 - All reachable listed controls inspected. One mixed category and one authentication blocker remain.
 - This demonstration does not describe a real account or actual settings changes.
+
+Discovery covers the requested scope.
 
 ## Historical baseline
 

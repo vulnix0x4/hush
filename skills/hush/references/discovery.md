@@ -4,9 +4,11 @@
 2. **Enabled senders:** OS notification settings inventory apps, websites, and mirrored sources. “Mirroring disabled” does not prove phone notifications are off; “Installed on this Mac” is not a phone preference. Do not toggle controls to inventory them.
 3. **Installed apps and badges:** Home Screen/App Library, app lists, or OS settings reveal apps outside the sampled week. Label badges as badges, not notification counts. Notification Center may be stale, grouped, sensitive, or partial. Read enough to identify category/source; do not dismiss or mark alerts read incidentally.
 4. **Web/connected accounts:** use open tabs and existing connectors. Website and phone accounts may differ; verify a minimal local alias before treating their preferences as shared. Avoid inbox conversations when only locating settings.
-5. **History/mail:** where authorized and supported, begin with a focused recent window (for example 30 days), service domains, sender information, subjects, or promotional labels. Extend only to fill meaningful gaps. No unlimited history enumeration, mailbox dumps, keychains/cookie stores, or token extraction. Queue unavailable sources for the end.
+5. **History/mail:** where authorized and supported, begin with a focused recent window (for example 30 days), service domains, sender information, subjects, or promotional labels. Extend only to fill meaningful gaps. No unlimited history enumeration, mailbox dumps, keychains/cookie stores, or token extraction. Request essential access promptly; retain unavailable sources as explicit scope gaps.
 
 Adapt the order to available access. Do not spend most of the run recovering a preferred source while others are usable. Broad scope means more than the top five noisy apps: follow priority cleanup with the remaining installed/enabled/account sources.
+
+Record whether discovery is complete for the requested scope separately from whether the currently known rows are resolved. An inaccessible phone is a discovery gap, not an empty inventory. A temporary Focus mode or scheduled summary affects delivery timing, not whether source categories are unwanted. Leave those preferences intact.
 
 ## Queue
 

@@ -12,10 +12,13 @@ Treat a cleanup request as authorization for routine notification-preference cha
 ## Run autonomously
 
 - Start with one brief statement of scope and policy. Do not conduct an intake interview or ask routine questions during a run. Use [policy.md](references/policy.md).
-- Check access quickly. If the phone is locked, authentication fails, or a tool requires user action, record the exact blocker and continue with other reachable work. Present a consolidated handoff at the end. Do not pause the entire run for one service.
+- Check required access early. **Request an unlock/sign-in as soon as it blocks work**, preferably through an asynchronous user-input tool, and continue other reachable tasks while the request is pending. Ask the person to authenticate in the app, never to send passwords or codes in chat. Avoid repeat requests for the same unchanged blocker. Read [access-and-resume.md](references/access-and-resume.md) when access or interaction fails.
 - Send concise progress updates when useful, without turning them into questions. Respect a request for silence where the environment permits it.
-- If an action requires unavailable approval, leave it pending; the no-questions preference does not bypass approval requirements.
+- No routine questions means no unnecessary decisions delegated to the user; it does not mean skipping essential access. Request required approvals at the appropriate action. Honor an explicit stricter instruction to defer even access requests, while recording that coverage remains incomplete.
 - Work through the whole discovered scope, including low-volume senders after the priorities. Do not stop after a few impressive changes. Keep a checkpoint and avoid unnecessary repeat visits.
+- When the user says access is ready, inspect fresh state and resume the blocked queue without asking them to repeat the task. If all independent work is exhausted while access is pending, checkpoint and say **awaiting access**, not complete. Do not silently shrink phone/device scope to a few open websites.
+
+For requests to test Hush, read [testing.md](references/testing.md). Distinguish software tests, live inspection, saved-setting changes, and unexercised paths in the result.
 
 ## 1. Discover and prioritize
 
@@ -51,6 +54,7 @@ Read category names **and descriptions**. “Reminders,” “Updates,” and �
 - Disable clear unwanted categories, including service marketing through push, email, and SMS when in scope. Inspect master switches and children; seller/partner marketing can have separate controls.
 - Preserve useful categories and deliberate subscriptions. Do not re-enable useful alerts that were already disabled.
 - For mixed categories, seek finer controls in submenus, websites, native apps, channel-specific preferences, or documented account settings. If inseparable, preserve the switch and report the exact unresolved tradeoff.
+- An off master or temporary pause can hide enabled children. Never enable a master to inspect children or undo a user's pause. Record whether a setting is persistently disabled, temporarily suppressed, inherited, or unknown. Source marketing still merits inspection when an OS permission is off; do not infer that email/SMS or other devices are quiet.
 - Never disable an entire app just because it is noisy. An app-wide switch is appropriate only when evidence establishes all its notification functions are unwanted, or the user explicitly requests it.
 - Do not alter memberships, community participation, ad personalization, location access, security settings, Focus modes, preview privacy, or account deletion settings as substitutes for notification cleanup.
 - Do not send support requests, STOP texts, email replies, or other messages without separate authorization. Use preference/unsubscribe controls. Keep billing subscriptions and notification subscriptions distinct.
@@ -61,6 +65,8 @@ After actions, inspect fresh visible state before deciding the next action. Stab
 
 Complete explicit Save/Update/Done flows. An unchecked box before Save is only staged. Confirm saved state, preferably by reopening/reloading when an explicit save flow exists, the result is ambiguous, or multiple settings changed together. Stop repeat verification once authoritative evidence answers the question.
 
+Before navigating away, resolve any staged form: save intended authorized changes or discard only this run's known edits. If an interaction is interrupted or a save times out, re-read saved state before retrying; do not blindly invert toggles or resubmit an unsubscribe. Preserve unrelated edits already in progress. Capture original values durably before changes, and checkpoint after verified batches. If a toggle causes collateral loss of useful alerts, restore this run's known change, verify recovery, and report the original issue unresolved.
+
 Record `verified`, `staged`, `failed`, or `uncertain`. Only verified changes belong in success counts. Distinguish saved-setting verification from future-delivery verification; the latter normally requires later observation and must not be claimed during this run.
 
 When interaction fails, inspect the blocker and try a meaningfully different route. Stop retrying a route after repeated unchanged results (normally two or three informed attempts). Continue elsewhere rather than ending the whole cleanup.
@@ -69,12 +75,12 @@ When interaction fails, inspect the blocker and try a meaningfully different rou
 
 Reconcile the queue against discovery sources. Every discovered account/channel needs an outcome or an explicit remaining-work entry. Revisit reachable outstanding work before finishing. Low volume, an app's name, or “probably important” is not evidence that its optional categories are clean.
 
-Finish when reachable in-scope work is exhausted and every remaining item is blocked or has an unresolved policy/control boundary. If interrupted earlier, checkpoint and label the report a partial pass. Never promise universal coverage or permanent quiet.
+Finish a complete cleanup only when discovery covers the requested scope, every queued account/channel is resolved or preserved, and no access request or save remains outstanding. A blocker in an entire discovery source (such as the phone) remains a scope gap even if all discovered web rows are done. If access is declined/unavailable or the run is interrupted, checkpoint and label the report partial or awaiting access. Do not declare success while a pending access request could unlock the remaining work. Never promise universal coverage or permanent quiet.
 
 Do not create recurring automation unless requested. On a rerun, read the prior ledger, re-check current settings, preserve changes the user made since the last run, and avoid blind toggle replay. A later manual re-enable may be a changed preference, not an error to silently undo.
 
 ## 6. Deliver a polished result
 
-Read [reporting.md](references/reporting.md). Return a short summary of verified changes, important alerts preserved, and the consolidated unresolved/access list. Link a private detailed report with coverage and undo information. Prefer the supplied local renderer when file output is supported.
+Read [reporting.md](references/reporting.md). Return a short summary of verified changes, important alerts preserved, and the remaining unresolved/access list. Distinguish access already requested from optional decisions saved for the end. Link a private detailed report with coverage and undo information. Prefer the supplied local renderer when file output is supported.
 
 Keep run reports, screenshots, account identifiers, notification contents, and browsing/mail evidence out of the reusable skill and public repository. Report only what is necessary for review. If publication is requested, make a separately redacted report; local output is not automatically public-safe.
